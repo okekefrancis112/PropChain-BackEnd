@@ -37,7 +37,10 @@
     "deploy:mainnet": "hardhat run scripts/deploy-mainnet.ts --network mainnet",
     "verify:contracts": "hardhat verify --network",
     "clean": "rimraf dist node_modules",
-    "health": "curl -f http://localhost:3000/health || exit 1"
+    "health": "curl -f http://localhost:3000/health || exit 1",
+    "db:backup": "bash scripts/backup.sh",
+    "db:restore": "bash scripts/restore.sh",
+    "db:benchmark": "ts-node test/database/performance.benchmark.ts"
   },
   "dependencies": {
     "@nestjs/bull": "^10.0.1",
@@ -96,6 +99,7 @@
     "@nestjs/cli": "^10.3.0",
     "@nestjs/schematics": "^10.0.3",
     "@nestjs/testing": "^10.3.0",
+    "testcontainers": "^10.4.0",
     "@types/bcrypt": "^5.0.2",
     "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",
@@ -164,6 +168,9 @@
     "redis",
     "api"
   ],
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/MettaChain/PropChain-BackEnd.git"
